@@ -1,17 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\LoginController;
 
-Route::get('/', function () {
-    // Store a value in the session
-    Session::put('test_key', 'Hello, from Session!');
-    return "Session value has been set";
-});
-Route::get('/session-get', function () {
-    $value = Session::get('test_key');
-    if ($value) {
-        return $value;
-    }
-    return "Cannot get session";
-});
+Route::get('/', [LoginController::class, 'loginForm']);
+Route::post('login', [LoginController::class, 'login']);
+Route::get('/dashboard', [LoginController::class, 'dashboard']);
